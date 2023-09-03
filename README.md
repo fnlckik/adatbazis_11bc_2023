@@ -1,1 +1,1 @@
-# Adatbázis-kezelés I.
+# Adatbázis-kezelés I. - 2023
