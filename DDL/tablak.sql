@@ -11,3 +11,8 @@ CREATE TABLE diak (
     kor TINYINT UNSIGNED
 );
 
+-- Rekord beszúrása
+INSERT INTO diak 
+VALUES 
+(1, "Bajor Szabolcs", 16),
+(2, "Huszár Hunor", 24);
