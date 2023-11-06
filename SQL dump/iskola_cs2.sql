@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Okt 24. 12:19
+-- Létrehozás ideje: 2023. Nov 06. 08:45
 -- Kiszolgáló verziója: 10.4.20-MariaDB
 -- PHP verzió: 8.0.9
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `iskola`
+-- Adatbázis: `iskola_cs2`
 --
-CREATE DATABASE IF NOT EXISTS `iskola` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `iskola`;
+CREATE DATABASE IF NOT EXISTS `iskola_cs2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `iskola_cs2`;
 
 -- --------------------------------------------------------
 
@@ -29,6 +29,7 @@ USE `iskola`;
 -- Tábla szerkezet ehhez a táblához `diak`
 --
 
+DROP TABLE IF EXISTS `diak`;
 CREATE TABLE `diak` (
   `id` int(11) DEFAULT NULL,
   `nev` varchar(25) DEFAULT NULL,

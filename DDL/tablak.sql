@@ -13,3 +13,16 @@ CREATE TABLE diak (
     nev VARCHAR(25),
     kor TINYINT UNSIGNED
 );
+
+-- Tábla törlése
+DROP TABLE diak;
+
+-- Tábla tartalmának törlése
+-- TRUNCATE TABLE diak;
+TRUNCATE diak;
+
+-- Tábla átnevezése
+RENAME TABLE diak TO student;
+
+-- Tábla módosítása (ALTER)
+-- ???
