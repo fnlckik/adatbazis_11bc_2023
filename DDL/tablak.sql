@@ -25,4 +25,25 @@ TRUNCATE diak;
 RENAME TABLE diak TO student;
 
 -- Tábla módosítása (ALTER)
--- ???
+
+-- Mező hozzáadása
+-- ADD COLUMN datum DATETIME;
+ALTER TABLE diak
+ADD datum DATETIME;
+
+-- Mező törlése
+-- DROP COLUMN kor;
+ALTER TABLE diak
+DROP kor;
+
+-- Mező módosítása (típus)
+ALTER TABLE diak
+MODIFY datum DATE;
+
+-- Mező módosítása (név + típus)
+ALTER TABLE diak
+CHANGE datum szuletes DATE;
+
+alter table diak
+add atlag float;
+
