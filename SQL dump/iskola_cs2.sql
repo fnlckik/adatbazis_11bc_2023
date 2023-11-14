@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 13. 08:46
+-- Létrehozás ideje: 2023. Nov 14. 12:24
 -- Kiszolgáló verziója: 10.4.20-MariaDB
 -- PHP verzió: 8.0.9
 
@@ -35,7 +35,7 @@ CREATE TABLE `diak` (
   `nev` varchar(25) DEFAULT NULL,
   `szuletes` date DEFAULT NULL,
   `atlag` float DEFAULT NULL,
-  `osztondij` int(10) UNSIGNED DEFAULT 2000
+  `osztondij` int(10) UNSIGNED DEFAULT 20000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -43,12 +43,16 @@ CREATE TABLE `diak` (
 --
 
 INSERT INTO `diak` (`id`, `nev`, `szuletes`, `atlag`, `osztondij`) VALUES
-(1, 'Sanyi', '2008-05-12', NULL, 2000),
-(2, 'Béla', '2012-02-02', NULL, 2000),
-(3, 'Gábor', '2018-10-25', NULL, 2000),
-(2, 'Jani', '2013-11-04', 4.8, 2000),
-(4, 'Bogi', NULL, 5, 2000),
-(4, 'Bogi', NULL, 5, 2000);
+(1, 'Sanyi', '2008-05-12', NULL, 20000),
+(2, 'Béla', '2012-02-02', NULL, 20000),
+(3, 'Gábor', '2018-10-25', NULL, 20000),
+(2, 'Jani', '2013-11-04', 4.8, 20000),
+(4, 'Bogi', NULL, 5, 20000),
+(4, 'Bogi', NULL, 5, 20000),
+(0, 'Béla', NULL, NULL, 20000),
+(0, 'Anna', NULL, NULL, 20000),
+(0, 'Máté', NULL, NULL, 20000),
+(NULL, 'Máté', NULL, NULL, 20000);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
