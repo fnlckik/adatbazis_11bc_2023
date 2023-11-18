@@ -44,6 +44,6 @@ TRUNCATE orszag;
 
 -- F9
 -- KL - 1p
-DROP DATABASE orszag_cs1;
+DROP DATABASE orszagok_cs1;
 
 
