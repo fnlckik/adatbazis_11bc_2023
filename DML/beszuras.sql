@@ -27,9 +27,9 @@ VALUES
 -- Minta adatok (ChatGPT)
 INSERT INTO diak
 VALUES
-(1, 'Kovács Péter', '2000-05-15', 4.2, 25000),
+(1, 'Kovács Péter', '2000-05-15', 4.2, 20000),
 (2, 'Nagy Anna', '2001-02-20', 3.8, 20000),
-(3, 'Kiss Gábor', '2000-09-10', NULL, 30000),
-(4, 'Tóth Éva', '2002-01-03', NULL, 22000),
-(5, 'Molnár Balázs', '2001-11-25', 4.1, 23000);
+(3, 'Kiss Gábor', '2000-09-10', NULL, 40000),
+(4, 'Tóth Éva', '2002-01-03', NULL, 60000),
+(5, 'Molnár Balázs', '2001-11-25', 4.1, 40000);
 

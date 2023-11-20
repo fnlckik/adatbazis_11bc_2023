@@ -25,3 +25,15 @@ MODIFY id INT NULL;
 ALTER TABLE diak
 ADD CONSTRAINT UQ_Diak_Id UNIQUE (id);
 
+-- Kulcs törlése
+ALTER TABLE diak
+DROP CONSTRAINT UQ_Diak_Atlag;
+
+-- Összetett kulcs megadása
+ALTER TABLE diak
+ADD CONSTRAINT UQ_Diak_NSzA UNIQUE (nev, szuletes, atlag);
+
+-- D) Elsődleges kulcs (primary key)
+-- Emlék: egy kitüntetett tulajdonságú kulcs
+-- Elsődleges kulcs egyetlen darab lehet!
+-- Kitüntetett tulajdonság: NOT NULL

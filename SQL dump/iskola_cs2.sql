@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 14. 12:24
+-- Létrehozás ideje: 2023. Nov 20. 08:45
 -- Kiszolgáló verziója: 10.4.20-MariaDB
 -- PHP verzió: 8.0.9
 
@@ -34,7 +34,7 @@ CREATE TABLE `diak` (
   `id` int(11) DEFAULT NULL,
   `nev` varchar(25) DEFAULT NULL,
   `szuletes` date DEFAULT NULL,
-  `atlag` float DEFAULT NULL,
+  `atlag` float NOT NULL,
   `osztondij` int(10) UNSIGNED DEFAULT 20000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -43,16 +43,22 @@ CREATE TABLE `diak` (
 --
 
 INSERT INTO `diak` (`id`, `nev`, `szuletes`, `atlag`, `osztondij`) VALUES
-(1, 'Sanyi', '2008-05-12', NULL, 20000),
-(2, 'Béla', '2012-02-02', NULL, 20000),
-(3, 'Gábor', '2018-10-25', NULL, 20000),
-(2, 'Jani', '2013-11-04', 4.8, 20000),
-(4, 'Bogi', NULL, 5, 20000),
-(4, 'Bogi', NULL, 5, 20000),
-(0, 'Béla', NULL, NULL, 20000),
-(0, 'Anna', NULL, NULL, 20000),
-(0, 'Máté', NULL, NULL, 20000),
-(NULL, 'Máté', NULL, NULL, 20000);
+(1, 'Kovács Péter', '2000-05-15', 4.2, 20000),
+(2, 'Nagy Anna', '2001-02-20', 3.8, 20000),
+(3, 'Kiss Gábor', '2000-09-10', 0, 40000),
+(4, 'Tóth Éva', '2002-01-03', 0, 60000),
+(5, 'Molnár Balázs', '2001-11-25', 4.1, 40000);
+
+--
+-- Indexek a kiírt táblákhoz
+--
+
+--
+-- A tábla indexei `diak`
+--
+ALTER TABLE `diak`
+  ADD UNIQUE KEY `UQ_Diak_Id` (`id`),
+  ADD UNIQUE KEY `UQ_Diak_NSzA` (`nev`,`szuletes`,`atlag`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
