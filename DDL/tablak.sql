@@ -35,4 +35,12 @@ DROP kor;
 
 -- Mező módosítása (típus)
 ALTER TABLE diak
-MODIFY COLUMN datum DATE;
+MODIFY datum DATE;
+
+-- Mező változtatása (név + típus)
+ALTER TABLE diak
+CHANGE datum szuletes DATE;
+
+alter table diak
+add atlag float;
+
