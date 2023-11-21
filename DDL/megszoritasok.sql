@@ -37,3 +37,15 @@ ADD CONSTRAINT UQ_Diak_NSzA UNIQUE (nev, szuletes, atlag);
 -- Emlék: egy kitüntetett tulajdonságú kulcs
 -- Elsődleges kulcs egyetlen darab lehet!
 -- Kitüntetett tulajdonság: NOT NULL
+ALTER TABLE diak
+ADD CONSTRAINT PK_Diak PRIMARY KEY (id);
+
+-- Elsődleges kulcs törlése
+ALTER TABLE diak
+DROP PRIMARY KEY;
+
+-- Automatikusan növekvő mező (sorszám)
+-- Csak PK mező esetén!!!
+ALTER TABLE diak
+MODIFY id INT NOT NULL AUTO_INCREMENT;
+
