@@ -49,3 +49,8 @@ DROP PRIMARY KEY;
 ALTER TABLE diak
 MODIFY id INT NOT NULL AUTO_INCREMENT;
 
+-- E) Ellenőrző feltétel
+-- Tiltó feltétel! Csak a FALSE értéket szűri ki!
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Atlag CHECK (1<=atlag AND atlag<=5);
+
