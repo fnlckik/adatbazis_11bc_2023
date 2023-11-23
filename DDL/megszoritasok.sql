@@ -30,3 +30,18 @@ ADD CONSTRAINT UQ_Diak_Id UNIQUE (id);
 -- Kulcs törlése
 ALTER TABLE diak
 DROP CONSTRAINT UQ_Diak_Id;
+
+-- Összetett kulcs megadása
+ALTER TABLE diak
+ADD CONSTRAINT UQ_Diak_NevSzulAtl UNIQUE (nev, szuletes, atlag);
+
+-- D) Elsődleges kulcs
+-- Kitüntetett tulajdonság: az elsődleges kulcs NOT NULL
+-- Egy darab elsődleges kulcs lehet
+ALTER TABLE diak
+ADD CONSTRAINT PK_Diak PRIMARY KEY (id);
+
+-- Elsődleges kulcs törlése
+ALTER TABLE diak
+DROP PRIMARY KEY;
+
