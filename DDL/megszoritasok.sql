@@ -23,5 +23,10 @@ ALTER TABLE diak
 MODIFY atlag FLOAT NULL;
 
 -- C) Egyedi érték (unique, kulcs)
+-- UC_Diak_Id
 ALTER TABLE diak
-ADD CONSTRAINT alma UNIQUE (id);
+ADD CONSTRAINT UQ_Diak_Id UNIQUE (id);
+
+-- Kulcs törlése
+ALTER TABLE diak
+DROP CONSTRAINT UQ_Diak_Id;
