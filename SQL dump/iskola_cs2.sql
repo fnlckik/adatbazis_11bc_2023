@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 21. 12:24
+-- Létrehozás ideje: 2023. Nov 27. 08:45
 -- Kiszolgáló verziója: 10.4.20-MariaDB
 -- PHP verzió: 8.0.9
 
@@ -45,10 +45,9 @@ CREATE TABLE `diak` (
 INSERT INTO `diak` (`id`, `nev`, `szuletes`, `atlag`, `osztondij`) VALUES
 (1, 'Kovács Péter', '2000-05-15', 4.2, 20000),
 (2, 'Nagy Anna', '2001-02-20', 3.8, 20000),
-(3, 'Kiss Gábor', '2000-09-10', 3, 40000),
-(4, 'Tóth Éva', '2002-01-03', 2.72, 60000),
-(5, 'Molnár Balázs', '2001-11-25', 4.1, 40000),
-(9, NULL, NULL, 2.1, 20000);
+(3, 'Kiss Gábor', '2000-09-10', 2.2, 40000),
+(4, 'Tóth Éva', '2002-01-03', 2.7, 60000),
+(5, 'Molnár Balázs', '2001-11-25', 4.1, 40000);
 
 --
 -- Indexek a kiírt táblákhoz
