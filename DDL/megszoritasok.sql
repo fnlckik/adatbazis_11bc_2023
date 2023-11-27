@@ -54,3 +54,12 @@ MODIFY id INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE diak
 ADD CONSTRAINT CHK_Diak_Atlag CHECK (1<=atlag AND atlag<=5);
 
+-- Nem egyenlo szintén: !=
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Szuletes CHECK (szuletes <> "0000-00-00");
+
+-- 
+-- ALTER TABLE diak
+-- ADD CONSTRAINT CHK_Diak_Osztondij CHECK (osztondij = 20000 OR osztondij = 40000 OR osztondij = 60000);
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Osztondij CHECK (osztondij IN (20000, 40000, 60000));
