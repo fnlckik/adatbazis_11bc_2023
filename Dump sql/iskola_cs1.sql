@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 23. 09:40
+-- Létrehozás ideje: 2023. Nov 30. 09:41
 -- Kiszolgáló verziója: 10.4.20-MariaDB
 -- PHP verzió: 8.0.9
 
@@ -36,7 +36,7 @@ CREATE TABLE `diak` (
   `szuletes` date DEFAULT NULL,
   `atlag` float DEFAULT NULL,
   `osztondij` int(10) UNSIGNED DEFAULT 20000
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- A tábla adatainak kiíratása `diak`
@@ -59,6 +59,16 @@ INSERT INTO `diak` (`id`, `nev`, `szuletes`, `atlag`, `osztondij`) VALUES
 ALTER TABLE `diak`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UQ_Diak_NevSzulAtl` (`nev`,`szuletes`,`atlag`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `diak`
+--
+ALTER TABLE `diak`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

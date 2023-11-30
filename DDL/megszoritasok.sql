@@ -42,6 +42,30 @@ ALTER TABLE diak
 ADD CONSTRAINT PK_Diak PRIMARY KEY (id);
 
 -- Elsődleges kulcs törlése
+-- Mj: előtte törölni kell az AUTO_INCREMENT tulajdonságot
 ALTER TABLE diak
 DROP PRIMARY KEY;
 
+-- Automatikusan növekvő mező
+-- csak egy auto_increment mező lehet (a PK)
+ALTER TABLE diak
+MODIFY id INT AUTO_INCREMENT;
+
+-- Máshonnan induljon az AUTO_INCREMENT
+ALTER TABLE diak
+AUTO_INCREMENT = 100;
+
+-- E) Ellenőrző feltétel (CHECK)
+-- Tiltó feltétel (FALSE értéket nem enged beszúrni)
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Atlag CHECK (1 <= atlag AND atlag <= 5);
+
+-- Csak helyes dátum legyen megadható ("0000-00-00" ne)
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Szuletes CHECK (szuletes != "0000-00-00");
+
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Szuletes CHECK (szuletes <> "0000-00-00");
+
+ALTER TABLE diak
+ADD CONSTRAINT CHK_Diak_Szuletes CHECK (NOT(szuletes = "0000-00-00"));
