@@ -7,10 +7,10 @@ USE Rendelesek_cs2;
 DROP TABLE IF EXISTS Ugyfel;
 CREATE TABLE Ugyfel (
     fnev VARCHAR(50) PRIMARY KEY,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     telefon CHAR(11),
-    fizetes INT,
-    nem CHAR(1),
+    fizetes INT CHECK (fizetes >= 0),
+    nem CHAR(1) CHECK (nem IN ("F", "N")),
     szuletes DATE,
     varos VARCHAR(50)
 );

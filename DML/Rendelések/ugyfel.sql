@@ -2,14 +2,25 @@
 -- SELECT, WHERE
 ---------------------------------------------------------------------------------
 
+-- WHERE-hez mehet minden olyan feltétel, ami CHECK-hez jó volt
+-- WHERE szigorú igazat kér (csak True értket fogad el)
+-- Kik laknak Pécsen?
+-- SELECT *
+-- FROM ugyfel
+-- WHERE varos = "Pécs";
 
+SELECT *
+FROM ugyfel
+WHERE fnev = "SkyWalker89";
 
 ---------------------------------------------------------------------------------
 -- DELETE
 ---------------------------------------------------------------------------------
 
 -- 1. 
-
+DELETE
+FROM ugyfel
+WHERE fnev = "SkyWalker89";
 
 -- 2.
 
