@@ -1,18 +1,19 @@
 -- 0. Adatbázis létrehozása
-DROP DATABASE IF EXISTS Rendelesek_cs2;
-CREATE DATABASE Rendelesek_cs2;
-USE Rendelesek_cs2;
+DROP DATABASE IF EXISTS Rendelesek_cs1;
+CREATE DATABASE Rendelesek_cs1;
+USE Rendelesek_cs1;
 
 -- 1. Ügyfél tábla létrehozása
 DROP TABLE IF EXISTS Ugyfel;
 CREATE TABLE Ugyfel (
     fnev VARCHAR(50) PRIMARY KEY,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     telefon CHAR(11),
-    fizetes INT,
-    nem CHAR(1),
+    fizetes INT CHECK (fizetes >= 0),
+    nem CHAR(1) CHECK (nem IN ("F", "N")),
     szuletes DATE,
     varos VARCHAR(50)
+    -- CHECK (fizetes >= 0 AND nem IN ("F", "N"))
 );
 
 -- 2. Ügyfél adatok (18 db)

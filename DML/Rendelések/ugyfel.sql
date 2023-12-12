@@ -2,14 +2,22 @@
 -- SELECT, WHERE
 ---------------------------------------------------------------------------------
 
-
+-- WHERE: logikai feltételt vár
+-- mindent ismer amit a CHECK-nél meg tudtunk adni
+-- a WHERE szigorú feltétel! => csak True esetén adja vissza a rekordot
+-- WHERE => szelekció (kiválogatás tétel)
+SELECT *
+FROM ugyfel
+WHERE fnev = "SkyWalker89";
 
 ---------------------------------------------------------------------------------
 -- DELETE
 ---------------------------------------------------------------------------------
 
 -- 1. 
-
+DELETE
+FROM ugyfel
+WHERE fnev = "SkyWalker89";
 
 -- 2.
 
