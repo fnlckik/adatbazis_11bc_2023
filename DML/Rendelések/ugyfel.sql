@@ -69,20 +69,31 @@ WHERE "1983-01-01" <= szuletes AND szuletes <= "1983-12-31";
 ---------------------------------------------------------------------------------
 
 -- 1.
-
+UPDATE ugyfel
+SET varos = "Budapest"
+WHERE fnev = "GamerSpirit";
 
 -- 2.
-
+UPDATE ugyfel
+SET fizetes = fizetes + 5999
+WHERE nem = "N";
 
 -- 3.
-
+UPDATE ugyfel
+SET fizetes = fizetes * 3
+WHERE varos = "Budapest";
 
 -- 4.
-
+UPDATE ugyfel
+SET fizetes = fizetes * 1.035
+WHERE telefon LIKE "3670%";
 
 -- 5.
-
+UPDATE ugyfel
+SET varos = "Cegléd", fizetes = NULL
+WHERE email LIKE "%ckik.hu" AND nem = "F";
 
 -- 6.
-
-
+UPDATE ugyfel
+SET telefon = NULL
+WHERE telefon LIKE "%7_";
