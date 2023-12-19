@@ -1,5 +1,25 @@
 -- 1. Rendelés tábla
+-- ON DELETE: törlés hatására ez történjen
+-- ON UPDATE: frissítés hatására ez történjen
+-- 3 lehetőség:
+-- RESTRICT: elutasítja a kérést (reject the query) => nem törölhető, nem módosítható
+-- CASCADE: "tovább gördíti"
+-- SET NULL: ismeretlenre állítja az értékét (NULL-ra)
+-- Alapértelmezett: RESTRICT
 
+-- Pl.: ON DELETE CASCADE: ügyfél törlése esetén a rendeléseit is törli
+-- Pl.: ON UPDATE CASCADE: fnev váltása esetén a másik táblában is változik
+CREATE TABLE Rendeles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ugyfel_id VARCHAR(50),
+    idopont DATETIME DEFAULT "2023-12-11 08:15",
+    allapot VARCHAR(20) DEFAULT "rögzítve",
+    osszeg INT CHECK (osszeg > 0),
+    valuta VARCHAR(10),
+    UNIQUE (ugyfel_id, idopont),
+    CHECK (allapot IN ("rögzítve", "folyamatban", "teljesítve", "törölve")),
+    FOREIGN KEY (ugyfel_id) REFERENCES Ugyfel (fnev) ON DELETE SET NULL ON UPDATE CASCADE
+);
 
 -- 2. Rendelés adatok (8 rekord)
 INSERT INTO Rendeles (id, ugyfel_id, idopont, allapot, osszeg, valuta)
@@ -18,10 +38,14 @@ VALUES
 -------------------------------------------------------------------------------
 
 -- 1.
-
+DELETE
+FROM ugyfel
+WHERE fnev = "SilverFox";
 
 -- 2.
-
+UPDATE ugyfel
+SET fnev = "OriasiKiseger"
+WHERE fnev = "GreenDragon";
 
 -- 3.
 
