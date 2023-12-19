@@ -48,20 +48,30 @@ SET fnev = "OriasiKiseger"
 WHERE fnev = "GreenDragon";
 
 -- 3.
-
+UPDATE Rendeles
+SET osszeg = osszeg * 1.2
+WHERE allapot = "folyamatban" AND valuta = "forint";
 
 -- 4.
-
+DELETE FROM Rendeles
+WHERE allapot = "törölve";
 
 -- 5.
-
+UPDATE Rendeles
+SET osszeg = osszeg - 1000
+WHERE osszeg >= 40000 AND allapot <> "teljesitve";
 
 -- 6.
-
+UPDATE Ugyfel
+SET fnev = "Sanyi"
+WHERE fnev LIKE "%22";
 
 -- 7.
-
+UPDATE Rendeles
+SET allapot = "folyamatban"
+WHERE allapot = "rögzítve" AND idopont < "2023-12-11 12:00:00";
 
 -- 8.
-
+INSERT INTO Rendeles (ugyfel_id, idopont, osszeg)
+VALUES ("GamerSpirit", "2023-12-12 14:56", 12500);
 
