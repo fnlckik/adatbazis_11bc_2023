@@ -50,28 +50,52 @@ INSERT INTO Raktar (kod, tipus, mennyiseg, ar, lejarat) VALUES
 ('321', 'kaktuszos', 40.0, 2600, '2025-02-10');
 
 -- F1
-
+SELECT *
+FROM Raktar
+WHERE 2000 <= ar AND ar <= 2500;
 
 -- F2
-
+SELECT *
+FROM Raktar
+WHERE tipus LIKE "%os";
 
 -- F3
-
+DELETE
+FROM Raktar
+WHERE lejarat <= "2023-12-31";
 
 -- F4
-
+UPDATE Raktar
+SET ar = ar * 1,35
+WHERE tipus = "zselés";
 
 -- F5
-
+UPDATE Raktar
+SET mennyiseg = mennyiseg - 18
+WHERE kod = "203";
 
 -- F6
-
+DELETE
+FROM Raktar
+WHERE kod LIKE "%2_";
 
 -- F7
-
+UPDATE Raktar
+SET mennyiseg = 0
+WHERE tipus = "kókuszos";
 
 -- F8
-
+-- CHECK (rendelo = "TESCO" OR rendelo = "LIDL" OR rendelo = "ALDI" OR rendelo = "SPAR")
+CREATE TABLE Vasarlas (
+    idopont DATETIME,
+    rendelo VARCHAR(50),
+    termek CHAR(3),
+    mennyiseg FLOAT,
+    CHECK (rendelo IN ("TESCO", "LIDL", "ALDI", "SPAR")),
+    FOREIGN KEY (termek) REFERENCES Raktar (kod) ON DELETE CASCADE ON UPDATE CASCADE
+    -- RESTRICT, SET NULL, CASCADE
+);
 
 -- F9
-
+INSERT INTO Vasarlas (idopont, rendelo, termek, mennyiseg)
+VALUES ("2024-01-09 12:22", "ALDI", "203", 2.4);
