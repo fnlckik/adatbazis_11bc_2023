@@ -5,20 +5,31 @@ CREATE TABLE Kavezo (
     cim VARCHAR(255) UNIQUE,
     nyitas TIME DEFAULT "8:00",
     ertekeles FLOAT,
-    wifi BOOLEAN DEFAULT TRUE
+    wifi BOOLEAN DEFAULT TRUE,
+    forgalom VARCHAR(10),
+    tulajdonos_id INT,
+    CHECK (forgalom IN ("kicsi", "átlagos", "tömeg")),
+    CHECK (0 <= ertekeles AND ertekeles <= 10),
+    FOREIGN KEY (tulajdonos_id) REFERENCES Tulajdonos (id) ON DELETE CASCADE
 );
 
 -- F5
+ALTER TABLE Kavezo
+ALTER nyitas SET DEFAULT "10:00";
 
+-- ALTER TABLE Kavezo
+-- MODIFY nyitas TIME DEFAULT "10:00";
 
 -- F6
-
+ALTER TABLE Kavezo
+DROP nyitas;
 
 -- F7
-
+ALTER TABLE Kavezo
+MODIFY tulajdonos_id INT NOT NULL;
 
 -- F8
-INSERT INTO Kavezo (id, nev, cim, ertekeles, forgalom, wifi, tulajdonos_id)
+INSERT INTO Kavezo (nev, cim, ertekeles, wifi, forgalom, tulajdonos_id)
 VALUES 
 ('Espresso Élmény', 'Budapest, Levél utca 1.', 9.5, TRUE, 'átlagos', 9),
 ('Cappuccino Kuckó', 'Debrecen, Kóstoló tér 2.', 8.2, TRUE, 'kicsi', 14),
@@ -30,7 +41,7 @@ VALUES
 ('Ristretto Rózsa', 'Veszprém, Zöldség út 8.', 8.0, TRUE, 'kicsi', 9),
 ('Affogato Álom', 'Miskolc, Ízletes sétány 9.', 7.5, FALSE, 'tömeg', 9),
 ('Turkish Delight Kávéház', 'Kecskemét, Edzés tér 10.', 9.2, TRUE, 'átlagos', 5),
-('Irish Coffee Kert', 'Nyíregyháza, Egészség köz 11.', 8.7, TRUE, 'kicsi', 60),
+('Irish Coffee Kert', 'Nyíregyháza, Egészség köz 11.', 8.7, TRUE, 'kicsi', 6),
 ('Café au Lait Palota', 'Szolnok, Friss út 12.', 7.0, FALSE, 'tömeg', 10),
 ('Espresso Eufória', 'Sopron, Gyümölcs utca 13.', 9.5, TRUE, 'átlagos', 19),
 ('Caramel Macchiato Csemege', 'Pécs, Ízletes út 14.', 8.2, TRUE, 'kicsi', 12),
