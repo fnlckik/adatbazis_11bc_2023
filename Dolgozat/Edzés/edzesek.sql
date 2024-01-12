@@ -43,31 +43,60 @@ VALUES
 ('Zara Parker', '06207654321', 5400, 4.8, '1980-11-22', 'kardio', true);
 
 -- F1
-
+SELECT *
+FROM Edzo
+WHERE ertekeles > 4.1 AND oradij < 4000;
 
 -- F2
-
+UPDATE Edzo
+SET szakag = "fitness"
+WHERE nev = "Jack Brown";
 
 -- F3
-
+DELETE
+FROM Edzo
+WHERE ertekeles < 3.7;
 
 -- F4
-
+-- aktivitas = FALSE
+-- aktivitas = 0
+SELECT *
+FROM Edzo
+WHERE szuletes >= "1989-11-01" AND NOT aktivitas;
 
 -- F5
-
+SELECT *
+FROM Edzo
+WHERE nev LIKE "%H% %";
 
 -- F6
-
+UPDATE Edzo
+SET oradij = oradij * 1.15
+WHERE aktivitas;
 
 -- F7
-
+UPDATE Edzo
+SET ertekeles = ertekeles + 0.2
+WHERE szakag = "tánc" AND aktivitas;
 
 -- F8
-
+DELETE
+FROM Edzo
+WHERE nev LIKE "___ %" AND szakag = "pilates";
 
 -- F9
-
+CREATE TABLE Edzes (
+    id INT PRIMARY KEY,
+    idopont TIME,
+    jelentkezok INT,
+    resztvevok INT,
+    edzo VARCHAR(20),
+    CHECK (resztvevok <= jelentkezok),
+    FOREIGN KEY (edzo) REFERENCES Edzo (nev) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
 -- F10
-
+INSERT INTO Edzes
+VALUES
+(1, "18:00", 23, 19, "Alice Brown"),
+(2, "18:00", 23, 19, "Bob Johnson");
