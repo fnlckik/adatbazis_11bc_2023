@@ -42,10 +42,12 @@ FROM Naplo
 WHERE idopont LIKE "2023%";
 
 -- F10
-
+ALTER TABLE Naplo
+ADD tipus VARCHAR(50);
 
 -- F11
-
+ALTER TABLE Naplo
+MODIFY idopont DATE;
 
 -- F12
-
+DROP TABLE Naplo, Diak;
