@@ -26,21 +26,44 @@ FROM Dolgozok;
 -- Add meg a dolgozók születési hónapját vezető 0-kal kiegészítve!
 SELECT
     vnev, knev, szuletes,
-    CONCAT("0", MONTH(szuletes)) AS honap
+    IF(MONTH(szuletes) < 10,
+        CONCAT("0", MONTH(szuletes)),
+        MONTH(szuletes)    
+    ) AS honap
 FROM Dolgozok;
 
--- Másképp: bal oldali "tömés"
-
+-- Másképp: bal oldali "tömés" - LPAD, RPAD
+-- LPAD(Mit?, Milyen hosszura?, Milyen karakterrel?)
+SELECT
+    vnev, knev, szuletes,
+    LPAD(MONTH(szuletes), 2, 0) AS honap
+FROM Dolgozok;
 
 -- Másképp dátum formátum?
-
+-- 2024. 02. 06.
+SELECT
+    vnev, knev, szuletes,
+    CONCAT(
+        YEAR(szuletes),
+        ". ",
+        LPAD(MONTH(szuletes), 2, 0),
+        ". ",
+        LPAD(DAY(szuletes), 2, 0),
+        "."
+    ) AS sz_datum
+FROM Dolgozok;
 
 
 
 
 -- F4
 -- Add meg a mai napot és az aktuális időt (ó, p, mp)!
-
+-- CURRENT DATE => CURDATE() => DATE
+-- CURRENT TIME => CURTIME() => TIME
+-- NOW() => DATETIME
+SELECT
+    CURDATE(), CURTIME(), NOW(),
+    HOUR(CURTIME()), MINUTE(CURTIME()), SECOND(CURTIME());
 
 
 
@@ -48,7 +71,10 @@ FROM Dolgozok;
 -- F5
 -- Add meg a 42 nappal későbbi dátumot!
 
+-- Rossz
+-- SELECT CURDATE() + 42;
 
+SELECT DATE_ADD(CURDATE(), INTERVAL 42 DAY);
 
 
 
