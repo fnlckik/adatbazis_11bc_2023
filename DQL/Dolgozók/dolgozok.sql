@@ -130,15 +130,49 @@ FROM Dolgozok;
 
 -- F9
 -- Add meg a dolgozók teljes keresetét!
+SELECT 
+    vnev, knev, fizetes, jutalom,
+    fizetes + COALESCE(jutalom, 0) AS kereset
+FROM Dolgozok;
 
+SELECT 
+    vnev, knev, fizetes, jutalom,
+    COALESCE(fizetes + jutalom, fizetes, 0) AS kereset
+FROM Dolgozok;
 
 -- F10
 -- Add meg a jutalom hány százaléka a fizetésnek!
 -- Csak azokban az esetekben számolj, amikor a jutalom ismert!
 -- Két tizedesre kerekítve, százalékként írasd ki az erdményt!
-
+SELECT
+    vnev, knev,
+    CONCAT(ROUND(jutalom / fizetes * 100, 2), "%") AS jutalomarany
+FROM Dolgozok
+WHERE jutalom IS NOT NULL;
 
 -- F11
 -- Csak azokat listázzuk, ahol a jutalom aránya legalább 1%
+SELECT
+    vnev, knev,
+    CONCAT(ROUND(jutalom / fizetes * 100, 2), "%") AS jutalomarany
+FROM Dolgozok
+WHERE jutalom IS NOT NULL AND jutalom / fizetes >= 0.01;
 
+-- Rossz!
+-- SELECT
+--     vnev, knev,
+--     CONCAT(ROUND(jutalom / fizetes * 100, 2), "%") AS jutalomarany
+-- FROM Dolgozok
+-- WHERE jutalom IS NOT NULL AND jutalomarany LIKE "1%";
 
+-- jutalom / fizetes >= 0.01
+SELECT
+    vnev, knev,
+    CONCAT(ROUND(jutalom / fizetes * 100, 2), "%") AS jutalomarany
+FROM Dolgozok
+WHERE jutalom / fizetes * 100 >= 1;
+
+-- SQL clauses: klóz, záradék
+-- 1. FROM: direkt szorzat
+-- 2. WHERE: szelekció (oszlopok kiválogatása)
+-- 3. SELECT: projekció (sorok kiválogatása)
