@@ -80,25 +80,54 @@ SELECT DATE_ADD(CURDATE(), INTERVAL 42 DAY);
 
 -- F6
 -- Add meg, hány nap múlva lesz karácsony!
+SELECT DATEDIFF("2024-12-24", CURDATE()) AS karacsonyig;
 
 
 -- Precízebben: ne függjünk az évtől sem!
+SELECT
+    DATEDIFF(
+        CONCAT(YEAR(CURDATE()), "-12-24"),
+        CURDATE()
+    ) AS karacsonyig;
 
-
-
+-- Gond: Ha már elmúlt karácsony?
+-- Mennyi idő van február 7-ig?
+-- Ötlet: Ha idén már elmúlt, nézzük a következő évhez viszonyítva!
+SELECT
+    IF(CONCAT(YEAR(CURDATE()), "-02-07") < CURDATE(),
+        DATEDIFF(
+            CONCAT(YEAR(CURDATE())+1, "-02-07"),
+            CURDATE()
+        ),
+        DATEDIFF(
+            CONCAT(YEAR(CURDATE()), "-02-07"),
+            CURDATE()
+        )
+    ) AS feb7ig;
 
 
 -- F7
 -- Hány naposak a dolgozók?
-
+SELECT vnev, knev, DATEDIFF(CURDATE(), szuletes) AS hany_napos
+FROM Dolgozok;
 
 
 
 
 -- F8
 -- Adjuk meg, hogy mennyi idősek a dolgozók!
+SELECT 
+    vnev, knev, szuletes, 
+    YEAR(CURDATE()) - YEAR(szuletes) AS eletkor
+FROM Dolgozok;
+
 
 
 -- Precízebben: Hány éves korukat töltötték már be idén?
-
-
+SELECT 
+    vnev, knev, szuletes,
+    IF(MONTH(CURDATE()) >= MONTH(szuletes) AND DAY(CURDATE()) >= DAY(szuletes),
+        YEAR(CURDATE()) - YEAR(szuletes),
+        YEAR(CURDATE()) - YEAR(szuletes) - 1
+    ) AS eletkor
+FROM Dolgozok;
