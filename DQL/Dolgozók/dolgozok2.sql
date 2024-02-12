@@ -124,10 +124,23 @@ FROM Dolgozok;
 
 
 -- Precízebben: Hány éves korukat töltötték már be idén?
+-- Betöltötte a következő életévét:
+-- I. Adott évben már elmúlt a születési hónapja
+-- II. A születési hónapja van, de már elmúlt a születési napja
 SELECT 
     vnev, knev, szuletes,
-    IF(MONTH(CURDATE()) >= MONTH(szuletes) AND DAY(CURDATE()) >= DAY(szuletes),
+    IF(MONTH(CURDATE()) > MONTH(szuletes) OR MONTH(CURDATE()) = MONTH(szuletes) AND DAY(CURDATE()) >= DAY(szuletes),
         YEAR(CURDATE()) - YEAR(szuletes),
         YEAR(CURDATE()) - YEAR(szuletes) - 1
     ) AS eletkor
 FROM Dolgozok;
+
+SELECT 
+    vnev, knev, szuletes,
+    IF(DATE_FORMAT(CURDATE(), "%m-%d") >= DATE_FORMAT(szuletes, "%m-%d"),
+        YEAR(CURDATE()) - YEAR(szuletes),
+        YEAR(CURDATE()) - YEAR(szuletes) - 1
+    ) AS eletkor
+FROM Dolgozok;
+
+-- SELECT DATE_FORMAT(CURDATE(), "%m-%d");
