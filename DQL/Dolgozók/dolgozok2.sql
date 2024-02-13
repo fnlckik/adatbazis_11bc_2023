@@ -82,31 +82,50 @@ FROM Dolgozok;
 -- Add meg a mai napot és az aktuális időt (ó, p, mp)!
 -- CURDATE(): current date => DATE
 -- CURTIME(): current time => TIME
--- ???
+-- NOW(): current date + time => DATETIME
+-- vagy: CURRENT_TIMESTAMP()
 SELECT
     CURDATE() AS dátum,
     CURTIME() AS idő,
-    CONCAT(CURDATE(), " ", CURTIME()) AS dátum_idő;
+    NOW() AS dátum_idő,
+    HOUR(CURTIME()) AS óra,
+    MINUTE(CURTIME()) AS perc,
+    SECOND(CURTIME()) AS másodperc;
+    -- CONCAT(CURDATE(), " ", CURTIME()) AS dátum_idő;
 
 
 
 
 -- F5
 -- Add meg a 42 nappal későbbi dátumot!
-
+-- YEAR, QUARTER, MONTH, DAY, HOUR, MINUTE
+SELECT DATE_ADD(CURDATE(), INTERVAL 42 DAY);
 
 
 
 
 -- F6
 -- Add meg, hány nap múlva lesz karácsony!
+-- DATEDIFF(mibol, mit): hány nap telik el a két dátum között
+SELECT DATEDIFF("2024-12-24", CURDATE());
 
 
 -- Precízebben: ne függjünk az évtől sem!
+SELECT DATEDIFF(
+        CONCAT(YEAR(CURDATE()), "-12-24"),
+        CURDATE()
+    );
 
+SELECT DATEDIFF(
+        CONCAT(YEAR("2027-02-13"), "-12-24"),
+        "2027-02-13"
+    );
 
-
-
+-- Hány nap van február 7-ig?
+SELECT DATEDIFF(
+        CONCAT(YEAR(CURDATE()), "-02-07"),
+        CURDATE()
+    );
 
 -- F7
 -- Hány naposak a dolgozók?
