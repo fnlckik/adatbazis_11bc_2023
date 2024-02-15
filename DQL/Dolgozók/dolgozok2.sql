@@ -123,21 +123,74 @@ SELECT DATEDIFF(
 
 -- Hány nap van február 7-ig?
 SELECT DATEDIFF(
-        CONCAT(YEAR(CURDATE()), "-02-07"),
+        CONCAT(YEAR(CURDATE())+1, "-02-07"),
         CURDATE()
     );
 
+SELECT
+    IF(CONCAT(YEAR(CURDATE()), "-12-24") > CURDATE(),
+        DATEDIFF(
+            CONCAT(YEAR(CURDATE()), "-12-24"), CURDATE()
+        ),
+        DATEDIFF(
+            CONCAT(YEAR(CURDATE())+1, "-12-24"), CURDATE()
+        )
+    ) AS karacsonyig;
+
 -- F7
 -- Hány naposak a dolgozók?
-
-
+SELECT 
+    vnev, knev, szuletes,
+    DATEDIFF(CURDATE(), szuletes) AS napos
+FROM Dolgozok;
 
 
 
 -- F8
 -- Adjuk meg, hogy mennyi idősek a dolgozók!
 
+-- Gond: Hány darab szökőév volt közben?
+-- SELECT 
+--     vnev, knev, szuletes,
+--     DATEDIFF(CURDATE(), szuletes) / 365 AS eletkor
+-- FROM Dolgozok;
+
+SELECT 
+    vnev, knev, szuletes,
+    YEAR(CURDATE()) - YEAR(szuletes) AS eletkor
+FROM Dolgozok;
 
 -- Precízebben: Hány éves korukat töltötték már be idén?
+-- IF(Betöltötte már idén)
+    MONTH(CURDATE()) > MONTH(szuletes) 
+OR
+    MONTH(CURDATE()) = MONTH(szuletes) 
+    AND
+    DAY(CURDATE()) >= DAY(szuletes)
+
+SELECT 
+    vnev, knev, szuletes,
+    IF(MONTH(CURDATE()) > MONTH(szuletes) OR MONTH(CURDATE()) = MONTH(szuletes) AND DAY(CURDATE()) > DAY(szuletes),
+        YEAR(CURDATE()) - YEAR(szuletes),
+        YEAR(CURDATE()) - YEAR(szuletes) - 1
+    ) AS eletkor
+FROM Dolgozok;
 
 
+-- F. Dominik
+-- Adjuk hozzá a születéshez a számolt életkort
+-- Ha így nagyobb dátumot kapunk, mint az aktuális
+-- akkor idén még nem töltötte be!
+DATE_ADD(
+    szuletes,
+    INTERVAL YEAR(CURDATE()) - YEAR(szuletes) YEAR
+) > CURDATE()
+
+-- Idén mikor fogja betölteni?
+SELECT 
+    vnev, knev, szuletes,
+    IF(DATE_ADD(szuletes, INTERVAL YEAR(CURDATE()) - YEAR(szuletes) YEAR) > CURDATE(),
+        YEAR(CURDATE()) - YEAR(szuletes) - 1,
+        YEAR(CURDATE()) - YEAR(szuletes)
+    ) AS eletkor
+FROM Dolgozok;
