@@ -1,44 +1,95 @@
+-- SQL (DQL) záradékok (klózok):
+-- 
+-- 1. FROM
+-- 2. WHERE
+-- 3. ???
+-- 4. ???
+-- 5. SELECT
+-- 6. ORDER BY
+-- 7. LIMIT
+
 -- 1. Add meg 7 darab férfi dolgozó minden adatát!
-
-
+SELECT *
+FROM Dolgozok
+WHERE nem = "F"
+LIMIT 7;
 
 
 
 -- 2. Add meg a rekordokat 
 -- a foglalkozások szerinti névsorrendben!
-
-
+SELECT *
+FROM Dolgozok
+ORDER BY pozicio ASC;
+-- ASC: ascending = növekvő
 
 
 
 -- 3. Sorold fel a dolgozókat fizetés szerinti sorrendben!
 -- Először a magas fizetésűek legyenek!
-
-
+SELECT *
+FROM Dolgozok
+ORDER BY fizetes DESC;
+-- DESC: descending = csökkenő
 
 
 
 -- 4. Sorold fel a dolgozókat névsor szerint! (vnev, knev)
+SELECT vnev, knev
+FROM Dolgozok
+ORDER BY vnev, knev;
+-- Kétszintű rendezés: 
+-- Ha megegyezik a vnev, akkor knev szerint rendez!
 
 
 -- Konkatenáció + alias:
-
+SELECT CONCAT(vnev, " ", knev) AS nev
+FROM Dolgozok
+ORDER BY nev;
 
 
 
 
 -- 5. Kinek a legnagyobb a jutalma?
-
-
+-- Max-kiválasztás tétele
+SELECT vnev, knev, jutalom
+FROM Dolgozok
+ORDER BY jutalom DESC
+LIMIT 1;
 
 
 
 -- 6. Kik azok a dolgozók, akiknek a fizetése 
 -- a legnagyobb 10 közé tartozik, de nem a top 3-ba?
+SELECT vnev, knev, fizetes
+FROM Dolgozok
+ORDER BY fizetes DESC
+LIMIT 7 OFFSET 3;
+-- OFFSET: eltolás
+
+SELECT *
+FROM
+(
+    SELECT *
+    FROM 
+    (
+        SELECT vnev, knev, fizetes
+        FROM Dolgozok
+        ORDER BY fizetes DESC
+        LIMIT 10
+    ) AS top10
+    ORDER BY top10.fizetes
+    LIMIT 7
+) AS hetjo
+ORDER BY hetjo.fizetes DESC;
 
 
 -- Rövidítve:
-
+SELECT vnev, knev, fizetes
+FROM Dolgozok
+ORDER BY fizetes DESC
+LIMIT 3, 7;
+-- 3-mal eltolva, 7 darab elemet kérünk!
 
 
 
