@@ -1,44 +1,90 @@
+-- Záradékok sorrendje:
+-- FROM -> WHERE -> SELECT
+
+-- 1. FROM
+-- 2. WHERE
+-- 3. ???
+-- 4. ???
+-- 5. SELECT
+-- 6. ORDER BY
+-- 7. LIMIT
+
 -- 1. Add meg 7 darab férfi dolgozó minden adatát!
-
-
+SELECT *
+FROM Dolgozok
+WHERE nem = "F"
+LIMIT 7;
 
 
 
 -- 2. Add meg a rekordokat 
 -- a foglalkozások szerinti névsorrendben!
-
-
+SELECT *
+FROM Dolgozok
+ORDER BY pozicio ASC;
+-- ASC: ascendint, növekvő sorba rendez
 
 
 
 -- 3. Sorold fel a dolgozókat fizetés szerinti sorrendben!
 -- Először a magas fizetésűek legyenek!
-
+SELECT *
+FROM Dolgozok
+ORDER BY fizetes DESC;
+-- DESC: descending, csökkenő sorba rendez
 
 
 
 
 -- 4. Sorold fel a dolgozókat névsor szerint! (vnev, knev)
-
+-- Kétszintű rendezés:
+-- elsőként a vnev szerint rendez
+-- egyező vnev esetén knev dönt
+SELECT *
+FROM Dolgozok
+ORDER BY vnev, knev;
+-- ORDER BY vnev ASC, knev DESC
 
 -- Konkatenáció + alias:
-
+-- SELECT id, CONCAT(vnev, " ", knev) AS nev
+-- FROM Dolgozok
+-- ORDER BY CONCAT(vnev, " ", knev);
+SELECT id, CONCAT(vnev, " ", knev) AS nev
+FROM Dolgozok
+ORDER BY nev;
 
 
 
 
 -- 5. Kinek a legnagyobb a jutalma?
+SELECT *
+FROM Dolgozok
+ORDER BY jutalom DESC
+LIMIT 1;
 
+-- Legkisebb jutalmú, akinek tényleg van jutalma?
+SELECT *
+FROM Dolgozok
+WHERE jutalom > 0
+ORDER BY jutalom ASC
+LIMIT 1;
 
 
 
 
 -- 6. Kik azok a dolgozók, akiknek a fizetése 
 -- a legnagyobb 10 közé tartozik, de nem a top 3-ba?
-
+SELECT *
+FROM Dolgozok
+ORDER BY fizetes DESC
+LIMIT 7 OFFSET 3;
+-- OFFSET: eltolás
 
 -- Rövidítve:
-
+SELECT *
+FROM Dolgozok
+ORDER BY fizetes DESC
+LIMIT 3, 7;
 
 
 
