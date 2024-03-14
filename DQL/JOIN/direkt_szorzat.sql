@@ -46,7 +46,8 @@ WHERE A1.betu <> A2.betu;
 
 -- 4. Most a sorrend nem számít a két mezőnél!
 -- azaz: (a, b) ugyanaz, mint (b, a)
--- {(a, b); (b, c); (c, a)}
+-- {(a, b); (a, c); (b, c)}
 -- "Ismétlés nélküli kombináció"
 SELECT A1.betu AS betu1, A2.betu AS betu2
-FROM A AS A1, A AS A2;
+FROM A AS A1, A AS A2
+WHERE A1.betu < A2.betu;
