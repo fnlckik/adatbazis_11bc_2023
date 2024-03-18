@@ -1,19 +1,49 @@
 -- Halmaz műveletek:
 
+-- a) Unio - egyesítés (vagy)
+SELECT *
+FROM diak d RIGHT JOIN jegy j ON d.id = j.diakId
+UNION
+SELECT *
+FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 
+-- b) Metszet - közös elemek (és)
+-- Ez valójában itt egy INNER JOIN
+SELECT *
+FROM diak d RIGHT JOIN jegy j ON d.id = j.diakId
+INTERSECT
+SELECT *
+FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 
+-- c) Különbség - elsőben van CSAK benne (nem)
+SELECT *
+FROM diak d RIGHT JOIN jegy j ON d.id = j.diakId
+EXCEPT
+SELECT *
+FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 
 -- -----------------------------------------------
 -- 6. Kik azok a diákok (nev), akik kaptak már 3-mast
 -- valamilyen tárgyból? Mindegyikük nevét csak egyszer
 -- jelenítsük meg!
-
+SELECT DISTINCT nev
+FROM diak d INNER JOIN jegy j ON d.id = j.diakId
+WHERE osztalyzat = 3;
 
 
 
 -- 7. Kik azok a diákok, akik nem kaptak még 3-mast
 -- egyetlen tárgyból sem?
+-- "Dobjuk ki a rosszat!" Jó = Összes - Rossz
 
+-- SELECT DISTINCT nev
+-- FROM diak d LEFT JOIN jegy j ON d.id = j.diakId
+SELECT nev
+FROM diak
+EXCEPT
+SELECT DISTINCT nev
+FROM diak d INNER JOIN jegy j ON d.id = j.diakId
+WHERE osztalyzat = 3;
 
 
 

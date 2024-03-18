@@ -45,10 +45,15 @@ FROM diak d, jegy j
 WHERE d.id = j.diakId;
 
 -- "Belső" kapcsolat:
+SELECT *
+FROM diak d INNER JOIN jegy j ON d.id = j.diakId;
 
+-- "Külső" kapcsolatok: OUTER JOIN => LEFT OUTER JOIN, RIGHT OUTER JOIN
+SELECT *
+FROM diak d RIGHT JOIN jegy j ON d.id = j.diakId;
 
--- "Külső" kapcsolatok:
-
+SELECT *
+FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 
 
 
@@ -56,3 +61,6 @@ WHERE d.id = j.diakId;
 -- => az a diák is aki nem kapott jegyet
 -- => az a jegy is, amit nem tudunk ki kapott
 
+-- FULL OUTER JOIN -> MariaDB-ben nincs
+SELECT *
+FROM diak d FULL JOIN jegy j ON d.id = j.diakId;
