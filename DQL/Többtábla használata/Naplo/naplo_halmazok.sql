@@ -38,27 +38,54 @@ WHERE osztalyzat = 3;
 
 -- SELECT DISTINCT nev
 -- FROM diak d LEFT JOIN jegy j ON d.id = j.diakId
-SELECT nev
+SELECT *
 FROM diak
 EXCEPT
 SELECT DISTINCT nev
 FROM diak d INNER JOIN jegy j ON d.id = j.diakId
 WHERE osztalyzat = 3;
 
-
+-- Vigyázat: halmaz műveleteknél egyforma felépítése kell legyen a két táblának
+-- A = {(1, Kovács Anna, 2001-04-20), (2, Nagy Bence, 1999-09-15), ...}
+-- B = {(Kovács Anna), (Varga Rita), (Szabó Eszter)}
 
 -- 8. Kik azok a diákok (nev), akik webprogból
 -- és fizikából is kaptak már jegyet?
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Webprogramozás"
+INTERSECT
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Fizika";
 
-
-
+-- Vigyázat: Ez így üres halmaz!
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Fizika" AND targy = "Webprogramozás";
 
 -- 9. Jelenítsük meg:
 -- azokat a diákokat, akiknek nincs jegyük, továbbá
 -- azokat a jegyeket, amelyek nem tudjuk kihez tartoznak!
 -- Ezeken kívül semmilyen más adatot ne listázzunk!
+SELECT nev
+FROM diak
+EXCEPT
+SELECT DISTINCT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+UNION
+SELECT DISTINCT targy
+FROM jegy
+WHERE diakId IS NULL;
 
-
+-- Mj: diak LEFT JOIN jegy === jegy RIGHT JOIN diak
+SELECT *
+FROM diak LEFT JOIN jegy ON diak.id = jegy.diakId
+WHERE targy IS NULL
+UNION
+SELECT *
+FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
+WHERE diakId IS NULL;
 
 
 -- 10.
@@ -71,6 +98,8 @@ WHERE osztalyzat = 3;
 -- biztosan tudjuk, hogy 2000-ben született!
 -- d) Kerüljenek a lista végére azon rekordok, ahol
 -- nem ismerjük a diák nevét!
-
+SELECT *
+FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
+WHERE osztalyzat = 5;
 
 
