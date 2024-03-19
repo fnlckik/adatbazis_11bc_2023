@@ -50,11 +50,20 @@ SELECT *
 FROM diak d INNER JOIN jegy j ON d.id = j.diakId;
 
 -- "Külső" kapcsolatok:
+-- RIGHT JOIN === RIGHT OUTER JOIN
+-- LEFT JOIN === LEFT OUTER JOIN
+-- Mj: diak RIGHT JOIN jegy === jegy LEFT JOIN diak
+SELECT *
+FROM diak d RIGHT JOIN jegy j ON d.id = j.diakId;
 
-
+SELECT *
+FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 
 
 -- 5. És ha tényleg minden adat kell?
 -- => az a diák is aki nem kapott jegyet
 -- => az a jegy is, amit nem tudunk ki kapott
 
+-- Sajnos ilyen MySQL-ben nincs
+SELECT *
+FROM diak d FULL JOIN jegy j ON d.id = j.diakId;
