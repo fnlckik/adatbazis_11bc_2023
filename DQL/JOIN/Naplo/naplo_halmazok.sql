@@ -27,22 +27,43 @@ FROM diak d LEFT JOIN jegy j ON d.id = j.diakId;
 -- 6. Kik azok a diákok (nev), akik kaptak már 3-mast
 -- valamilyen tárgyból? Mindegyikük nevét csak egyszer
 -- jelenítsük meg!
-SELECT *
+SELECT DISTINCT nev
 FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
 WHERE osztalyzat = 3;
 
-
 -- 7. Kik azok a diákok, akik nem kaptak még 3-mast
 -- egyetlen tárgyból sem?
+-- Jó = Összes - Rossz
+SELECT nev
+FROM diak
+EXCEPT
+SELECT DISTINCT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE osztalyzat = 3;
 
-
+-- És ha csak azok kellenek, akik kaptak már jegyet?
+SELECT nev
+FROM diak
+EXCEPT
+SELECT DISTINCT nev
+FROM diak LEFT JOIN jegy ON diak.id = jegy.diakId
+WHERE osztalyzat = 3 OR osztalyzat IS NULL;
 
 
 -- 8. Kik azok a diákok (nev), akik webprogból
 -- és fizikából is kaptak már jegyet?
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Webprogramozás"
+INTERSECT
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Fizika";
 
-
-
+-- Mi lenne ha => Ez nem jó!
+SELECT nev
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE targy = "Webprogramozás" AND targy = "Fizika";
 
 -- 9. Jelenítsük meg:
 -- azokat a diákokat, akiknek nincs jegyük, továbbá
