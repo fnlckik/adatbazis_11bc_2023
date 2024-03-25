@@ -1,18 +1,32 @@
--- Csoportosítás
+-- Csoportosítás: GROUP BY
+
+-- Aggregátum (összesítő) függvények:
+-- COUNT, SUM, AVG, MIN, MAX
+
+-- AVG: average (átlag)
 
 -- 1. Adjuk meg tantárgyanként:
 -- a) Hány jegyet adtak eddig?
 -- b) Mi a legrosszabb jegy?
 -- c) Mennyi a jegyek átlaga?
-
+SELECT 
+    targy,
+    COUNT(osztalyzat) AS jegyek_szama,
+    MIN(osztalyzat) AS legrosszabb_jegy,
+    ROUND(AVG(osztalyzat), 2) AS atlag,
+    ROUND(SUM(osztalyzat) / COUNT(osztalyzat), 2) AS atlag2
+FROM jegy
+GROUP BY targy;
 
 
 
 -- 2. Adjuk meg, hogy melyik
 -- diák átlaga a legjobb!
 -- Mezők: id, nev, atlag
--- Mo: Molnár Dávid - 4.5
-
+-- Mo: 4 - Molnár Dávid - 4.5
+SELECT diak.id, nev, AVG(osztalyzat) AS atlag
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+GROUP BY diak.id;
 
 
 
