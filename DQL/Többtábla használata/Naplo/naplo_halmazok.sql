@@ -100,6 +100,16 @@ WHERE diakId IS NULL;
 -- nem ismerjük a diák nevét!
 SELECT *
 FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
-WHERE osztalyzat = 5;
+WHERE osztalyzat = 5 AND (YEAR(datum) <> 2000 OR datum IS NULL)
+ORDER BY COALESCE(nev, "ZZZ");
 
 
+
+SELECT *
+FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
+WHERE osztalyzat = 5
+EXCEPT
+SELECT *
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+WHERE datum LIKE "2000-%"
+ORDER BY COALESCE(nev, "ZZZ");
