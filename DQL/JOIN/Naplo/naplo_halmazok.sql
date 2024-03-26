@@ -69,9 +69,13 @@ WHERE targy = "Webprogramozás" AND targy = "Fizika";
 -- azokat a diákokat, akiknek nincs jegyük, továbbá
 -- azokat a jegyeket, amelyek nem tudjuk kihez tartoznak!
 -- Ezeken kívül semmilyen más adatot ne listázzunk!
-
-
-
+SELECT *
+FROM diak LEFT JOIN jegy ON diak.id = jegy.diakId
+WHERE osztalyzat IS NULL
+UNION
+SELECT *
+FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
+WHERE diakId IS NULL;
 
 -- 10.
 -- a) Adjuk meg azokat a napló bejegyzéseket, amelyek
@@ -84,5 +88,12 @@ WHERE targy = "Webprogramozás" AND targy = "Fizika";
 -- d) Kerüljenek a lista végére azon rekordok, ahol
 -- nem ismerjük a diák nevét!
 
+-- ON: "ahol a kapcsolat alapját az képzi, hogy..."
+SELECT *
+FROM jegy LEFT JOIN diak ON diak.id = jegy.diakId;
+
+SELECT *
+FROM diak RIGHT JOIN jegy ON diak.id = jegy.diakId
+ORDER BY diak.nev;
 
 
