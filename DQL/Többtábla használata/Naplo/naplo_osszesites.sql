@@ -26,14 +26,22 @@ GROUP BY targy;
 -- Mo: 4 - Molnár Dávid - 4.5
 SELECT diak.id, nev, AVG(osztalyzat) AS atlag
 FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
-GROUP BY diak.id;
-
+GROUP BY diak.id
+ORDER BY atlag DESC
+LIMIT 1;
+-- Gond: Mi van akkor, ha több ember átlaga is 4.5?
+-- Válasz: esetleg később...
 
 
 -- 3. Adjuk meg, hogy az egyes
 -- években hány diák született!
-
-
+-- Megoldás:
+-- 1999 2
+-- 2000 1
+-- 2001 3
+SELECT YEAR(datum), COUNT(*)
+FROM diak
+GROUP BY YEAR(datum);
 
 
 -- 4. Adjuk meg tárgyanként, hogy
@@ -44,13 +52,33 @@ UPDATE jegy
 SET diakId = 1
 WHERE id = 7;
 
+-- Rossz mo:
+SELECT targy, COUNT(*)
+FROM jegy
+GROUP BY targy;
+
+-- Jó mo:
+SELECT targy, COUNT(DISTINCT diakId)
+FROM jegy
+GROUP BY targy;
+
+-- Megjegyzés:
+-- COUNT(*): Hány rekord van?
+-- COUNT(diakId): Hány rekord van, ahol a diakId nem NULL?
+-- COUNT(DISTINCT diakId): Hány rekord van, ahol a diakId egyedi?
 
 
 
 -- 5. Jelenítsük meg tantárgyanként, hogy
 -- az egyes tanulóknak hány jegye van!
+-- Mezők: targy, nev, jegyek_szama
 
-
+-- Pl.:
+-- Fizika, Kovács Anna, 2
+-- Fizika, Szabó Eszter, 1
+SELECT targy, nev, COUNT(*)
+FROM diak INNER JOIN jegy ON diak.id = jegy.diakId
+GROUP BY jegy.targy, diak.id
 
 
 -- Csoportra vonatkozó feltétel!
